@@ -9,6 +9,9 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+// 暗号化
+use Illuminate\Support\Facades\Crypt;
+
 class RegisterController extends Controller
 {
     /*
@@ -64,6 +67,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // $encrypted= Crypt::encryptString($data['email']);
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
