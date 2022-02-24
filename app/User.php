@@ -52,4 +52,8 @@ class User extends Authenticatable implements MustVerifyEmail
         $key = "hogehoge";
         $this->attributes['email'] = openssl_encrypt($value, 'AES-128-ECB', $key);
     }
+
+    public function posts() {
+        return $this->hasMany('App\Models\Post');
+    }
 }
