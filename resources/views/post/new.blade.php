@@ -11,6 +11,8 @@
                   <form method="POST" action="{{ route('Post.create') }}">
                     @csrf
                     <table class="table">
+                    @error('title')<p>{{ $message }}</p>@enderror
+                    @error('body')<p>{{ $message }}</p>@enderror
                       <tr>
                         <th>タイトル</th>
                         <td><input class="form-control" type="text" name="title" placeholder="タイトル"></td>

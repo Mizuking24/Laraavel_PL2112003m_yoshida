@@ -55,8 +55,8 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">投稿一覧</a>
-                                    <a class="dropdown-item" href="#">新規会員登録</a>
+                                    <a class="dropdown-item" href="{{ route('Posts') }}">投稿一覧</a>
+                                    <a class="dropdown-item" href="{{ route('Post.new') }}">新規投稿</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
