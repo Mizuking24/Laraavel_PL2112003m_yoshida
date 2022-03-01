@@ -13,6 +13,7 @@ class PostController extends Controller
 {
     public function index() {
         $posts = Post::get();
+        $user = Auth::id();
 
         $pc = Post::whereMonth('created_at', now());
         $postCount = $pc->get();
@@ -22,6 +23,7 @@ class PostController extends Controller
 
         return view('post.index', [
             'posts' => $posts,
+            'user' => $user,
             'postCount' => $postCount,
             'userCount' => $userCount,
         ]);
@@ -66,5 +68,41 @@ class PostController extends Controller
             'user' => $user,
             'comments' => $comments,
         ]);
+    }
+
+    public function edit(Request $request) {
+        $postData = Post::where('id', $request->id);
+        if (!$postData->exists()) {
+            abort(404);
+        }
+        $post = $postData->first();
+
+        $userData = User::where('id', $post->user_id);
+        if (!$userData->exists()) {
+            abort(404);
+        }
+        $user = $userData->first();
+
+        return view('post.edit', [
+            'post' => $post,
+            'user' => $user,
+        ]);
+    }
+
+    public function update(PostRequest $request) {
+        $post = Post::find($request->id);
+        if (!empty($post)) {
+            $post->fill($request->all())->save();
+            return redirect('/posts');
+        }
+    }
+
+    public function destroy(Request $request) {
+        $post = Post::find($request->id);
+        if(!empty($post)) {
+            $post->delete();
+            session()->flash('message', '「'.$post->title.'」を削除しました。');
+        }
+        return redirect('/posts');
     }
 }

@@ -25,6 +25,12 @@
                     <th>投稿者</th>
                     <td>{{ $user->name }}</td>
                   </tr>
+                  <tr>
+                    <th>
+                      <a href="{{ route('Posts') }}"><<--back</a>
+                    </th>
+                    <td></td>
+                  </tr>
                 </table>
               </div>
             </div>
@@ -36,7 +42,7 @@
                 <table class="table">
                   @foreach($comments as $comment)
                   <tr>
-                    <th>投稿者ID</th>
+                    <th>投稿者</th>
                     <th>コメント</th>
                   </tr>
                   <tr>
